@@ -5,4 +5,4 @@ Servicio API para la comunicación interna
 1. Descarga la última version disponible
 2. Descomprime el zip en la carpeta raíz `C:`
 3. Ejecuta como administrador el archivo `installer.bat`
-4. Prueba el en POS
+4. Prueba en el POS
