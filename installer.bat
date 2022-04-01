@@ -17,14 +17,14 @@ nssm remove "SmartBambooApiService" confirm
 nssm install "SmartBambooApiService" "py" "%actual_dir%\sb_api_service.py"
 nssm start "SmartBambooApiService"
 
-mkdir "C:\SF Systems\"
-if not exist "C:\SF Systems\" (
-  mkdir "C:\SF Systems\"
-) else (
-  rmdir /Q /S "C:\SF Systems\"
-  mkdir "C:\SF Systems\"
-)
+if not exist "C:\SF Systems2\" (
+  mkdir "C:\SF Systems2\"
+) 
+@REM else (
+@REM   rmdir /Q /S "C:\SF Systems\"
+@REM   mkdir "C:\SF Systems\"
+@REM )
 
-@REM 7z x installer.zip -o"C:\SF Systems"
+7z x installer.zip -o"C:\SF Systemss"
 
 PAUSE
