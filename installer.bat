@@ -1,11 +1,11 @@
 @ECHO OFF
 set actual_dir=%cd%
 
-set sb_service_path = "C:\SB Service\"
-set sb_service = "SmartBambooApiService"
-set sb_api = "sb_api_service.py"
+set sb_service_path="C:\SB Service\"
+set sb_service="SmartBambooApiService"
+set sb_api="sb_api_service.py"
 
-set sf_systems =  "C:\SF Systems\"
+set sf_systems="C:\SF Systems\"
 
 POWERSHELL -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 choco feature enable -n=allowGlobalConfirmation
@@ -23,7 +23,7 @@ if not exist %sf_systems% (
 )
 
 if (Get-Service "%sb_service%" -ErrorAction SilentlyContinue) {
-  $running = Get-Service "%sb_service%"
+  $running=Get-Service "%sb_service%"
   if ($running.Status -eq "Running") {
     nssm stop "%sb_service%"
     nssm remove "%sb_service%" confirm
