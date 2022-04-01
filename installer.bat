@@ -7,6 +7,7 @@ set sb_api="sb_api_service.py"
 
 set sf_systems="C:\SF Systems\"
 
+if (not( powershell choco -v))
 POWERSHELL -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 choco feature enable -n=allowGlobalConfirmation
 
@@ -22,13 +23,13 @@ if not exist %sf_systems% (
     7z x RelaySinPantallas.zip -o%sf_systems%
 )
 
-if (Get-Service %sb_service% -ErrorAction SilentlyContinue) {
+if Get-Service %sb_service% -ErrorAction SilentlyContinue (
   set running=Get-Service %sb_service%
-  if (%running%.Status -eq "Running") {
+  if %running%.Status -eq "Running" {
     nssm stop %sb_service%
     nssm remove %sb_service% confirm
   }
-}
+)
 
 if not exist %sb_service_path% (
     mkdir %sb_service_path%
