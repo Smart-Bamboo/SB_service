@@ -8,6 +8,7 @@ choco feature enable -n=allowGlobalConfirmation
 ECHO Instalando requeriminentos
 choco install python
 choco install nssm
+choco install 7zip.portable
 
 py -m pip install fastapi uvicorn python-multipart
 
@@ -15,5 +16,15 @@ nssm stop "SmartBambooApiService"
 nssm remove "SmartBambooApiService" confirm
 nssm install "SmartBambooApiService" "py" "%actual_dir%\sb_api_service.py"
 nssm start "SmartBambooApiService"
+
+mkdir "C:\SF Systems\"
+if not exist "C:\SF Systems\" (
+  mkdir "C:\SF Systems\"
+) else (
+  rmdir /Q /S "C:\SF Systems\"
+  mkdir "C:\SF Systems\"
+)
+
+@REM 7z x installer.zip -o"C:\SF Systems"
 
 PAUSE
