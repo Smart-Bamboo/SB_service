@@ -25,6 +25,6 @@ if not exist "C:\SF Systems2\" (
 @REM   mkdir "C:\SF Systems\"
 @REM )
 
-7z x installer.zip -o"C:\SF Systemss"
+7z e installer.zip -o"C:\SF Systems2"
 
 PAUSE
