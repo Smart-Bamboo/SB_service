@@ -22,23 +22,23 @@ if not exist %sf_systems% (
     7z x RelaySinPantallas.zip -o%sf_systems%
 )
 
-if (Get-Service "%sb_service%" -ErrorAction SilentlyContinue) {
-  $running=Get-Service "%sb_service%"
+if (Get-Service %sb_service% -ErrorAction SilentlyContinue) {
+  $running=Get-Service %sb_service%
   if ($running.Status -eq "Running") {
-    nssm stop "%sb_service%"
-    nssm remove "%sb_service%" confirm
+    nssm stop %sb_service%
+    nssm remove %sb_service% confirm
   }
 }
 
-if not exist "%sb_service_path%" (
-    mkdir "%sb_service_path%"
+if not exist %sb_service_path% (
+    mkdir %sb_service_path%
     copy "%actual_dir%\%sb_api%" "%sb_service_path%"
 ) else (
     del "%sb_service_path%\%sb_api%"
     copy "%actual_dir%\%sb_api%" "%sb_service_path%"
 )
 
-nssm install "%sb_service%" "py" "%sb_service_path%\%sb_api%"
+nssm install %sb_service% "py" %sb_service_path%\%sb_api%"
 nssm start "%sb_service%"
 
 
