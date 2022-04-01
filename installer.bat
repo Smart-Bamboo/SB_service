@@ -17,9 +17,9 @@ choco install 7zip.portable
 py -m pip install fastapi uvicorn python-multipart
 
 
-if not exist "%sf_systems%" (
-    mkdir "%sf_systems%"
-    7z x RelaySinPantallas.zip -o"%sf_systems%"
+if not exist %sf_systems% (
+    mkdir %sf_systems%
+    7z x RelaySinPantallas.zip -o%sf_systems%
 )
 
 if (Get-Service "%sb_service%" -ErrorAction SilentlyContinue) {
