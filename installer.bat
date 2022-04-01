@@ -26,10 +26,9 @@ if not exist %sf_systems% (
     7z x RelaySinPantallas.zip -o%sf_systems%
 )
 
-Get-Service %sb_service%
-
-echo 'probando get service'
+powershell Get-Service %sb_service%
 PAUSE
+
 if Get-Service %sb_service% -ErrorAction SilentlyContinue (
   set running=Get-Service %sb_service%
   if %running%.Status -eq "Running" {
