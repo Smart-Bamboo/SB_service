@@ -7,9 +7,14 @@ set sb_api="sb_api_service.py"
 
 set sf_systems="C:\SF Systems\"
 
-if (not( powershell choco -v))
-POWERSHELL -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
-choco feature enable -n=allowGlobalConfirmation
+
+powershell choco -v
+if errorlevel 1 (
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+    choco feature enable -n=allowGlobalConfirmation
+)
+
+
 
 choco install python
 choco install nssm
