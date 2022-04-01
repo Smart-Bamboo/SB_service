@@ -23,8 +23,8 @@ if not exist %sf_systems% (
 )
 
 if (Get-Service %sb_service% -ErrorAction SilentlyContinue) {
-  $running=Get-Service %sb_service%
-  if ($running.Status -eq "Running") {
+  set running=Get-Service %sb_service%
+  if (%running%.Status -eq "Running") {
     nssm stop %sb_service%
     nssm remove %sb_service% confirm
   }
