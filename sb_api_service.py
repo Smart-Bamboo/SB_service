@@ -1,10 +1,11 @@
-from fastapi import FastAPI, Form
-from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 import socket
 
+import uvicorn
+from fastapi import FastAPI, Form
+from fastapi.middleware.cors import CORSMiddleware
+
 host = '127.0.0.1'
-port = 11000 
+port = 11000
 
 app = FastAPI()
 
@@ -22,8 +23,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def client_program(message):
 
+def client_program(message):
     client_socket = socket.socket()
     client_socket.connect((host, port))
     client_socket.send(message.encode('utf-8'))
@@ -31,11 +32,12 @@ def client_program(message):
     client_socket.close()
     return data
 
+
 def trn_to_dict(trn):
     dictionary = dict()
     try:
         resp = trn[:-1]
-        resp = resp.replace('|Respuesta=','')
+        resp = resp.replace('|Respuesta=', '')
         for param in resp.replace('|', '&').split('&'):
             params = param.split('=')
             dictionary[params[0]] = params[1]
@@ -43,16 +45,19 @@ def trn_to_dict(trn):
         return trn
     return dictionary
 
+
 @app.post("/")
 def bridge(trn: str = Form(...)):
     data = trn
     trama = str(len(data) + 5).zfill(4) + '|' + data
+    print(trama)
     try:
         socket_resp = client_program(trama)
         response = trn_to_dict(socket_resp)
     except Exception as e:
         response = {'error': str(e)}
     return response
+
 
 if __name__ == "__main__":
     uvicorn.run("sb_api_service:app", host="127.0.0.1", port=5000, log_level="info")

@@ -1,4 +1,6 @@
 @ECHO OFF
+@setlocal enableextensions
+@cd /d "%~dp0"
 set actual_dir=%cd%
 
 set sb_service_path="C:\SB Service\"
@@ -34,11 +36,12 @@ if %errorlevel% == 0 (
 
 if not exist %sb_service_path% (
     mkdir %sb_service_path% >NUL
-    copy %actual_dir%\%sb_api% %sb_service_path% >NUL
 ) else (
+    nssm stop %sb_service% >NUL
+    nssm remove %sb_service% confirm >NUL
     del %sb_service_path%\%sb_api% >NUL
-    copy %actual_dir%\%sb_api% %sb_service_path% >NUL
 )
+copy %actual_dir%\%sb_api% %sb_service_path% >NUL
 
 nssm install %sb_service% "py" %sb_service_path%\%sb_api%
 nssm start %sb_service% >NUL
