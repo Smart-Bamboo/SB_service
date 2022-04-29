@@ -36,21 +36,21 @@ if %errorlevel% == 0 (
   nssm remove %sb_service% confirm >NUL
 )
 
-if not exist %sb_service_path% (
-    mkdir %sb_service_path% >NUL
-    mkdir %sb_service_path%\logs >NUL
-    type nul >%sb_service_path%\logs\service.log
-    type nul >%sb_service_path%\logs\service-error.log
+if not exist "C:\SB_Service\" (
+    mkdir "C:\SB_Service\" >NUL
+    mkdir "C:\SB_Service\logs" >NUL
+    copy %actual_dir%\service.log "C:\SB_Service\logs\service.log"
+    copy %actual_dir%\service_error.log "C:\SB_Service\logs\service_error.log"
 ) else (
     nssm stop %sb_service% >NUL
     nssm remove %sb_service% confirm >NUL
-    del %sb_service_path%\%sb_api% >NUL
+    del "C:\SB_Service\sb_api_service.py" >NUL
 )
-copy %actual_dir%\%sb_api% %sb_service_path% >NUL
+copy %actual_dir%\%sb_api% "C:\SB_Service\" >NUL
 
-nssm install %sb_service% "py" %sb_service_path%\%sb_api%
+nssm install %sb_service% "py" "C:\SB_Service\sb_api_service.py"
 nssm set  %sb_service% AppStdout "C:\SB_Service\logs\service.log"
-nssm set  %sb_service% AppStderr "C:\SB_Service\logs\service-error.log"
+nssm set  %sb_service% AppStderr "C:\SB_Service\logs\service_error.log"
 nssm start %sb_service% >NUL
 
 
