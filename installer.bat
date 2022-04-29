@@ -3,11 +3,13 @@
 @cd /d "%~dp0"
 set actual_dir=%cd%
 
-set sb_service_path="C:\SB Service\"
+set sb_service_path="C:\SB_Service\"
 set sb_service=SmartBambooApiService
 set sb_api=sb_api_service.py
 
 set sf_systems="C:\SF Systems\"
+
+powershell Set-ExecutionPolicy AllSigned
 
 powershell choco -v
 if not %errorlevel% == 0 (
@@ -36,6 +38,9 @@ if %errorlevel% == 0 (
 
 if not exist %sb_service_path% (
     mkdir %sb_service_path% >NUL
+    mkdir %sb_service_path%\logs >NUL
+    type nul >%sb_service_path%\logs\service.log
+    type nul >%sb_service_path%\logs\service-error.log
 ) else (
     nssm stop %sb_service% >NUL
     nssm remove %sb_service% confirm >NUL
@@ -44,6 +49,8 @@ if not exist %sb_service_path% (
 copy %actual_dir%\%sb_api% %sb_service_path% >NUL
 
 nssm install %sb_service% "py" %sb_service_path%\%sb_api%
+nssm set  %sb_service% AppStdout "C:\SB_Service\logs\service.log"
+nssm set  %sb_service% AppStderr "C:\SB_Service\logs\service-error.log"
 nssm start %sb_service% >NUL
 
 
