@@ -1,7 +1,10 @@
 @ECHO OFF
 @setlocal enableextensions
 @cd /d "%~dp0"
+
 set actual_dir=%cd%
+set currentpath=%cd%
+
 
 set sb_service_path="C:\SB_Service\"
 set sb_service=SmartBambooApiService
@@ -9,20 +12,16 @@ set sb_api=sb_api_service.py
 
 set sf_systems="C:\SF Systems\"
 
-powershell Set-ExecutionPolicy AllSigned
-
-powershell choco -v
-if not %errorlevel% == 0 (
-    powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
-    choco feature enable -n=allowGlobalConfirmation
-)
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+choco feature enable -n allowGlobalConfirmation
+choco upgrade chocolatey
+choco upgrade all
 
 choco install python
 choco install nssm
 choco install 7zip.portable
 
 py -m pip install fastapi uvicorn python-multipart >NUL
-
 
 if not exist %sf_systems% (
     mkdir %sf_systems%
@@ -52,6 +51,5 @@ nssm install %sb_service% "py" "C:\SB_Service\sb_api_service.py"
 nssm set  %sb_service% AppStdout "C:\SB_Service\logs\service.log"
 nssm set  %sb_service% AppStderr "C:\SB_Service\logs\service_error.log"
 nssm start %sb_service% >NUL
-
 
 PAUSE
