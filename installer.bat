@@ -21,7 +21,7 @@ choco install python
 choco install nssm
 choco install 7zip.portable
 
-py -m pip install fastapi uvicorn python-multipart >NUL
+py -m pip install fastapi uvicorn python-multipart 'sentry-sdk[fastapi]' >NUL
 
 if not exist %sf_systems% (
     mkdir %sf_systems%

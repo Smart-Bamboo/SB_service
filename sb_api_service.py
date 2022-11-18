@@ -1,26 +1,33 @@
 import socket
 
 import uvicorn
+import sentry_sdk
+
 from fastapi import FastAPI, Form
 from fastapi.middleware.cors import CORSMiddleware
 
 host = '127.0.0.1'
 port = 11000
 
+sentry_sdk.init(
+    dsn='https://b2fe0a625f874d508ab0a0b9e99f690e@o1161513.ingest.sentry.io/6368330',
+    traces_sample_rate=1.0,
+)
+
 app = FastAPI()
 
 origins = [
-    "http://localhost:8069",
-    "http://dev.odoo-smartbamboo.mx",
-    "https://odoo-smartbamboo.mx",
+    'http://localhost:8069',
+    'http://dev.odoo-smartbamboo.mx',
+    'https://odoo-smartbamboo.mx',
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=['*'],
+    allow_headers=['*'],
 )
 
 
@@ -46,7 +53,7 @@ def trn_to_dict(trn):
     return dictionary
 
 
-@app.post("/")
+@app.post('/')
 def bridge(trn: str = Form(...)):
     data = trn
     trama = str(len(data) + 5).zfill(4) + '|' + data
@@ -59,5 +66,10 @@ def bridge(trn: str = Form(...)):
     return response
 
 
-if __name__ == "__main__":
-    uvicorn.run("sb_api_service:app", host="127.0.0.1", port=5000, log_level="info")
+if __name__ == '__main__':
+    uvicorn.run(
+        'sb_api_service:app',
+        host='127.0.0.1',
+        port=5000,
+        log_level='info',
+    )
