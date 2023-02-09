@@ -17,11 +17,11 @@ choco feature enable -n allowGlobalConfirmation
 choco upgrade chocolatey
 choco upgrade all
 
-choco install python
+choco install python --pre
 choco install nssm
 choco install 7zip.portable
 
-py -m pip install fastapi uvicorn python-multipart 'sentry-sdk[fastapi]' >NUL
+python -m pip install fastapi uvicorn python-multipart 'sentry-sdk[fastapi]' >NUL
 
 if not exist %sf_systems% (
     mkdir %sf_systems%
@@ -48,7 +48,7 @@ if not exist "C:\SB_Service\" (
 
 copy "%actual_dir%\%sb_api%" "C:\SB_Service\"
 
-nssm install %sb_service% "py" "C:\SB_Service\sb_api_service.py"
+nssm install %sb_service% "python" "C:\SB_Service\sb_api_service.py"
 nssm set  %sb_service% AppStdout "C:\SB_Service\logs\service.log"
 nssm set  %sb_service% AppStderr "C:\SB_Service\logs\service_error.log"
 nssm start %sb_service% >NUL
