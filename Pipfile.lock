@@ -119,11 +119,11 @@
                 "fastapi"
             ],
             "hashes": [
-                "sha256:273fe05adf052b40fd19f6d4b9a5556316807246bd817e5e3482930730726bb0",
-                "sha256:72c00322217d813cf493fe76590b23a757e063ff62fec59299f4af7201dd4448"
+                "sha256:36a1ca082a3065a8a05aafa4b1e3d74e9459d41fbb0bea8a5364caca68626341",
+                "sha256:82faf9e2c9eb77401a7a187094b126ca25c2a3a478de6704612f48b3346f7a84"
             ],
             "index": "pypi",
-            "version": "==1.14.0"
+            "version": "==1.21.0"
         },
         "sniffio": {
             "hashes": [
