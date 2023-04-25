@@ -1,0 +1,25 @@
+name: Bump version
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: fregante/setup-git-user@v2
+      - uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: npm install -g standard-version
+      - name: Create Bump
+        run: npx standard-version
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
