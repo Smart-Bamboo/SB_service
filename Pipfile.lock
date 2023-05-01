@@ -151,19 +151,19 @@
         },
         "urllib3": {
             "hashes": [
-                "sha256:8a388717b9476f934a21484e8c8e61875ab60644d29b9b39e11e4b9dc1c6b305",
-                "sha256:aa751d169e23c7479ce47a0cb0da579e3ede798f994f5816a74e4f4500dcea42"
+                "sha256:2ce66a68134be469f5df5d46d724237489b3cd85b2bba2223dbbee1746548826",
+                "sha256:d75e5ece05ff170e323303fd924edf29e705f5ae057c489f453a686b639bb68a"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==1.26.15"
+            "version": "==2.0.1"
         },
         "uvicorn": {
             "hashes": [
-                "sha256:0fac9cb342ba099e0d582966005f3fdba5b0290579fed4a6266dc702ca7bb032",
-                "sha256:e47cac98a6da10cd41e6fd036d472c6f58ede6c5dbee3dbee3ef7a100ed97742"
+                "sha256:79277ae03db57ce7d9aa0567830bbb51d7a612f54d6e1e3e92da3ef24c2c8ed8",
+                "sha256:e9434d3bbf05f310e762147f769c9f21235ee118ba2d2bf1155a7196448bd996"
             ],
             "index": "pypi",
-            "version": "==0.21.1"
+            "version": "==0.22.0"
         }
     },
     "develop": {}
