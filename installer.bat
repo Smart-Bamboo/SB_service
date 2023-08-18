@@ -12,17 +12,17 @@ set sb_api=sb_api_service.py
 
 set sf_systems="C:\SF Systems\"
 
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-choco feature enable -n allowGlobalConfirmation
-choco upgrade chocolatey
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin" >NUL 2>&1
+choco feature enable -n allowGlobalConfirmation >NUL
+choco upgrade chocolatey >NUL
 :: choco upgrade all
 
-choco install python --pre
-choco install nssm
-choco install 7zip.portable
+choco install python --pre >NUL
+choco install nssm >NUL
+choco install 7zip.portable >NUL
 
-python -m pip install --upgrade pip
-python -m pip install fastapi uvicorn python-multipart "sentry-sdk[fastapi]"
+python -m pip install --upgrade pip >NUL
+python -m pip install fastapi uvicorn python-multipart "sentry-sdk[fastapi]" >NUL
 
 if not exist %sf_systems% (
     mkdir %sf_systems%
