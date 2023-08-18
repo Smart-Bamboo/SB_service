@@ -31,7 +31,7 @@ choco install 7zip.portable >NUL
 
 ECHO Installing python dependencies ...
 python -m pip install --upgrade pip >NUL
-python -m pip install fastapi uvicorn python-multipart 'sentry-sdk[fastapi]' >NUL
+python -m pip install fastapi uvicorn python-multipart "sentry-sdk[fastapi]" >NUL
 
 ECHO Installing RelaySinPantallas ...
 if not exist %sf_systems% (
@@ -82,6 +82,3 @@ IF "%service_status%"=="SERVICE_PAUSED" (
     ECHO SmartBambooApiService is not running
     EXIT /B 1
 )
-
-
-PAUSE
