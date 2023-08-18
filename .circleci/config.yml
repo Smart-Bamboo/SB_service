@@ -10,9 +10,9 @@ jobs:
       shell: powershell.exe
     steps:
       - checkout
-      - run: .\installer.bat
-      - run: cat C:\SB_Service\logs\service.log
-      - run: cat C:\SB_Service\logs\service_error.log
+      - run: 
+          name: Run installer
+          command: .\installer.bat
       - run: nssm status SmartBambooApiService
 
 workflows:
