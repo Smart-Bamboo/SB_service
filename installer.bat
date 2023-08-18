@@ -75,7 +75,7 @@ ECHO Checking the status of SmartBambooApiService ...
 
 FOR /F %%A IN ('nssm status SmartBambooApiService') DO SET service_status=%%A
 
-IF "%service_status%"=="SERVICE_PAUSED" (
+IF "%service_status%"=="SERVICE_RUNNING" (
     ECHO SmartBambooApiService is running correctly
     PAUSE
 ) ELSE (
