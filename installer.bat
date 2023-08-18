@@ -31,7 +31,7 @@ choco install 7zip.portable >NUL
 
 ECHO Installing python dependencies ...
 python -m pip install --upgrade pip >NUL
-python -m pip install fastapi uvicorn python-multipart "sentry-sdk[fastapi]" >NUL
+python -m pip install fastapi uvicorn python-multipart 'sentry-sdk[fastapi]' >NUL
 
 ECHO Installing RelaySinPantallas ...
 if not exist %sf_systems% (
@@ -53,8 +53,8 @@ if not exist "C:\SB_Service\" (
     ECHO Creating SB_Service folder ...
     mkdir "C:\SB_Service\" >NUL
     mkdir "C:\SB_Service\logs" >NUL
-    copy %actual_dir%\service.log "C:\SB_Service\logs\service.log"
-    copy %actual_dir%\service_error.log "C:\SB_Service\logs\service_error.log"
+    copy %actual_dir%\service.log "C:\SB_Service\logs\service.log" >NUL
+    copy %actual_dir%\service_error.log "C:\SB_Service\logs\service_error.log" >NUL
 ) else (
     ECHO Removing SB_Service api and service ...
     nssm stop %sb_service% >NUL
