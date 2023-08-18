@@ -71,4 +71,17 @@ nssm set  %sb_service% AppStdout "C:\SB_Service\logs\service.log" >NUL
 nssm set  %sb_service% AppStderr "C:\SB_Service\logs\service_error.log" >NUL
 nssm start %sb_service% >NUL
 
+ECHO Checking the status of SmartBambooApiService ...
+
+FOR /F %%A IN ('nssm status SmartBambooApiService') DO SET service_status=%%A
+
+IF "%service_status%"=="SERVICE_PAUSED" (
+    ECHO SmartBambooApiService is running correctly
+    PAUSE
+) ELSE (
+    ECHO SmartBambooApiService is not running
+    EXIT /B 1
+)
+
+
 PAUSE
