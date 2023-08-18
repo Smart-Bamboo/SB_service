@@ -12,31 +12,44 @@ set sb_api=sb_api_service.py
 
 set sf_systems="C:\SF Systems\"
 
+ECHO Installing choco ...
+
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin" >NUL 2>&1
 choco feature enable -n allowGlobalConfirmation >NUL
 choco upgrade chocolatey >NUL
 :: choco upgrade all
 
+ECHO Installing python ...
 choco install python --pre >NUL
+
+ECHO Installing nssm ...
 choco install nssm >NUL
+
+ECHO Installing 7zip ...
 choco install 7zip.portable >NUL
 
+ECHO Installing python dependencies ...
 python -m pip install --upgrade pip >NUL
 python -m pip install fastapi uvicorn python-multipart "sentry-sdk[fastapi]" >NUL
 
+ECHO Installing RelaySinPantallas ...
 if not exist %sf_systems% (
     mkdir %sf_systems%
     7z x RelaySinPantallas.zip -o%sf_systems%
 )
 nssm install uPayService Application "C:\SF Systems\RelaySinPantallas\uPayService.exe"
 
+ECHO Checking if SmartBambooApiService exist ...
 powershell Get-Service %sb_service% -ErrorAction SilentlyContinue >NUL
 if %errorlevel% == 0 (
-  nssm stop %sb_service% >NUL
-  nssm remove %sb_service% confirm >NUL
+    ECHO Removing SmartBambooApiService
+    nssm stop %sb_service% >NUL
+    nssm remove %sb_service% confirm >NUL
 )
 
+ECHO Checking if SB_Service folder exist ...
 if not exist "C:\SB_Service\" (
+    ECHO Copying SB_Service folder ...
     mkdir "C:\SB_Service\" >NUL
     mkdir "C:\SB_Service\logs" >NUL
     copy %actual_dir%\service.log "C:\SB_Service\logs\service.log"
