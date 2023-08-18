@@ -13,7 +13,12 @@ jobs:
       - run: 
           name: Run installer
           command: .\installer.bat
-      - run: nssm status SmartBambooApiService
+      - run: 
+          name: Service status
+          command: nssm status SmartBambooApiService
+      - run:
+          name: Test open port
+          command: telnet localhost PORTNUMBER
 
 workflows:
   tests:
