@@ -1,16 +1,18 @@
 version: 2.1
 
+orbs:
+  win: circleci/windows@5.0
+
 jobs:
-  run-installer:
-    docker:
-      - image: mcr.microsoft.com/windows:ltsc2019
+  build:
+    executor:
+      name: win/default
+      shell: powershell.exe
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "cmd.exe dir"
+      - run: systeminfo
 
 workflows:
   tests:
     jobs:
-      - run-installer
+      - build
