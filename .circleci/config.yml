@@ -13,9 +13,6 @@ jobs:
       - run: 
           name: Run installer
           command: .\installer.bat
-      - run: 
-          name: Service status
-          command: nssm status SmartBambooApiService
 
 workflows:
   tests:
