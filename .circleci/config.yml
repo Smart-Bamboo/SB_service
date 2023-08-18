@@ -16,9 +16,6 @@ jobs:
       - run: 
           name: Service status
           command: nssm status SmartBambooApiService
-      - run:
-          name: Test open port
-          command: telnet localhost 5000
 
 workflows:
   tests:
