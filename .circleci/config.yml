@@ -10,7 +10,8 @@ jobs:
       shell: powershell.exe
     steps:
       - checkout
-      - run: systeminfo
+      - run: dir
+      - run: installer.bat
 
 workflows:
   tests:
