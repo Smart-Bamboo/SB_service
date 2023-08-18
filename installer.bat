@@ -51,6 +51,6 @@ copy "%actual_dir%\%sb_api%" "C:\SB_Service\"
 nssm install %sb_service% "python" "C:\SB_Service\sb_api_service.py"
 nssm set  %sb_service% AppStdout "C:\SB_Service\logs\service.log"
 nssm set  %sb_service% AppStderr "C:\SB_Service\logs\service_error.log"
-nssm start %sb_service%
+nssm start %sb_service% >NUL
 
 PAUSE

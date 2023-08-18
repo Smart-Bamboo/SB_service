@@ -11,6 +11,8 @@ jobs:
     steps:
       - checkout
       - run: .\installer.bat
+      - run: cat C:\SB_Service\logs\service.log
+      - run: cat C:\SB_Service\logs\service_error.log
       - run: nssm status SmartBambooApiService
 
 workflows:
