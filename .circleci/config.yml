@@ -10,9 +10,8 @@ jobs:
       shell: powershell.exe
     steps:
       - checkout
-      - run: dir
-      - run: python --version
       - run: .\installer.bat
+      - run: nssm status SmartBambooApiService
 
 workflows:
   tests:
