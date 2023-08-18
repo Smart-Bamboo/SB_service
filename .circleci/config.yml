@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  run-installer:
+    docker:
+      - image: mcr.microsoft.com/windows
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "cmd.exe dir"
+
+workflows:
+  tests:
+    jobs:
+      - run-installer
