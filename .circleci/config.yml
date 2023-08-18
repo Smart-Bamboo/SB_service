@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run: dir
       - run: python --version
-      - run: installer.bat
+      - run: .\installer.bat
 
 workflows:
   tests:
