@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   run-installer:
     docker:
-      - image: mcr.microsoft.com/windows
+      - image: mcr.microsoft.com/windows:ltsc2019
     steps:
       - checkout
       - run:
