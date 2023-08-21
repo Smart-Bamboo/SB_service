@@ -13,6 +13,9 @@ jobs:
       - run: 
           name: Run installer
           command: .\installer.bat
+      - run: 
+          name: Run installer twice
+          command: .\installer.bat
 
 workflows:
   tests:
