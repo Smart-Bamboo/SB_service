@@ -33,14 +33,28 @@ ECHO Installing python dependencies ...
 python -m pip install --upgrade pip >NUL
 python -m pip install fastapi uvicorn python-multipart "sentry-sdk[fastapi]" >NUL
 
-ECHO Installing RelaySinPantallas ...
-if not exist %sf_systems% (
-    mkdir %sf_systems%
-    7z x RelaySinPantallas.zip -o%sf_systems% >NUL
+ECHO Checking if RelaySinPantallas service exists ...
+powershell Get-Service uPayService -ErrorAction SilentlyContinue >NUL
+if exist %sf_systems% (
+    ECHO Remove RelaySinPantallas previous installation ...
+    nssm stop uPayService >NUL
+    nssm remove uPayService confirm >NUL
 )
+
+ECHO Checking if RelaySinPantallas folder exists ...
+if exist %sf_systems% (
+    ECHO Remove RelaySinPantallas folder ...
+    del %sf_systems% >NUL
+)
+
+ECHO Copying RelaySinPantallas folder ...
+mkdir %sf_systems% >NUL
+7z x RelaySinPantallas.zip -o%sf_systems% >NUL
+
+ECHO Installing RelaySinPantallas service ...
 nssm install uPayService Application "C:\SF Systems\RelaySinPantallas\uPayService.exe" >NUL
 
-ECHO Checking if SmartBambooApiService exist ...
+ECHO Checking if SmartBambooApiService exists ...
 powershell Get-Service %sb_service% -ErrorAction SilentlyContinue >NUL
 if %errorlevel% == 0 (
     ECHO Removing SmartBambooApiService ...
@@ -48,19 +62,17 @@ if %errorlevel% == 0 (
     nssm remove %sb_service% confirm >NUL
 )
 
-ECHO Checking if SB_Service folder exist ...
-if not exist "C:\SB_Service\" (
-    ECHO Creating SB_Service folder ...
-    mkdir "C:\SB_Service\" >NUL
-    mkdir "C:\SB_Service\logs" >NUL
-    copy %actual_dir%\service.log "C:\SB_Service\logs\service.log" >NUL
-    copy %actual_dir%\service_error.log "C:\SB_Service\logs\service_error.log" >NUL
-) else (
-    ECHO Removing SB_Service api and service ...
-    nssm stop %sb_service% >NUL
-    nssm remove %sb_service% confirm >NUL
+ECHO Checking if SB_Service folder exists ...
+if exist "C:\SB_Service\" (
+    ECHO Removing SB_Service folder ...
     del "C:\SB_Service\sb_api_service.py" >NUL
 )
+
+ECHO Creating SB_Service folder ...
+mkdir "C:\SB_Service\" >NUL
+mkdir "C:\SB_Service\logs" >NUL
+copy %actual_dir%\service.log "C:\SB_Service\logs\service.log" >NUL
+copy %actual_dir%\service_error.log "C:\SB_Service\logs\service_error.log" >NUL
 
 ECHO Copying SB_Service folder ...
 copy "%actual_dir%\%sb_api%" "C:\SB_Service\" >NUL
@@ -71,8 +83,7 @@ nssm set  %sb_service% AppStdout "C:\SB_Service\logs\service.log" >NUL
 nssm set  %sb_service% AppStderr "C:\SB_Service\logs\service_error.log" >NUL
 nssm start %sb_service% >NUL
 
-ECHO Checking the status of SmartBambooApiService ...
-
+ECHO Checking SmartBambooApiService status ...
 FOR /F %%A IN ('nssm status SmartBambooApiService') DO SET service_status=%%A
 
 IF "%service_status%"=="SERVICE_RUNNING" (
@@ -80,5 +91,6 @@ IF "%service_status%"=="SERVICE_RUNNING" (
     PAUSE
 ) ELSE (
     ECHO SmartBambooApiService is not running
+    PAUSE
     EXIT /B 1
 )
