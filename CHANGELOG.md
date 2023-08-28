@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 2.2.0 (2023-08-28)
+
+
+### Features
+
+* update dependabot.yml ([19abb63](https://github.com/Smart-Bamboo/SB_service/commit/19abb6395f5922711bc609bde334ae95f79f9605))
+
 ## 2.1.0 (2023-08-22)
 
 
