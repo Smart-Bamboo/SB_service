@@ -1,5 +1,5 @@
 {
-  "version": "2.2.13",
+  "version": "2.2.14",
   "devDependencies": {
     "standard-version": "^9.5.0"
   }
