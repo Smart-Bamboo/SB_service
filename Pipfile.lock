@@ -188,11 +188,12 @@
                 "fastapi"
             ],
             "hashes": [
-                "sha256:eb65289da013ca92fad2694851ad2f086aa3825e808dc285bd7dcaf63602bb18",
-                "sha256:f7125a9235795811962d52ff796dc032cd1d0dd98b59beaced8380371cd9c13c"
+                "sha256:b54c54a2160f509cf2757260d0cf3885b608c6192c2555a3857e3a4d0f84bdb3",
+                "sha256:c278e0f523f6f0ee69dc43ad26dcdb1202dffe5ac326ae31472e012d941bee21"
             ],
             "index": "pypi",
-            "version": "==1.44.0"
+            "markers": "python_version >= '3.6'",
+            "version": "==2.0.1"
         },
         "sniffio": {
             "hashes": [
@@ -223,7 +224,7 @@
                 "sha256:450b20ec296a467077128bff42b73080516e71b56ff59a60a02bef2232c4fa9d",
                 "sha256:d0570876c61ab9e520d776c38acbbb5b05a776d3f9ff98a5c8fd5162a444cf19"
             ],
-            "markers": "python_version >= '3.6'",
+            "markers": "python_version >= '3.8'",
             "version": "==2.2.1"
         },
         "uvicorn": {
