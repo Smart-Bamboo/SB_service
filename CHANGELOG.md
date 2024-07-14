@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 2.4.0 (2024-07-14)
+
+
+### Features
+
+* use latest version ([bcd9ccf](https://github.com/Smart-Bamboo/SB_service/commit/bcd9ccf68d5e8e8d169409fed5cdc1168b116a8b))
+
 ## 2.3.0 (2024-07-14)
 
 
