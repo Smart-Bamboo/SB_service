@@ -74,12 +74,12 @@
         },
         "fastapi": {
             "hashes": [
-                "sha256:1d7bbbeabbaae0acb0c22f0ab0b040f642d3093ca3645f8c876b6f91391861d8",
-                "sha256:5d4746f6e4b7dff0b4f6b6c6d5445645285f662fe75886e99af7ee2d6b58bb3e"
+                "sha256:0adb148b62edb09e8c6eeefa3ea934e8f276dabc038c5a82989ea6346050c3da",
+                "sha256:44474a22913057b1acb973ab90f4b671ba5200482e7622816d79105dcece1ac5"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==0.114.1"
+            "version": "==0.114.2"
         },
         "fastapi-cli": {
             "hashes": [
